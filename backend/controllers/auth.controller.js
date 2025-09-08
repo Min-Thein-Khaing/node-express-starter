@@ -113,4 +113,16 @@ const getUser = async(req,res,next) => {
     res.status(500).json({ message: err.message });
   }
 }
-export { signUp, login, logout,getUser };
+const getUserAll = async(req,res,next) => {
+  try {
+    const user = await User.find({});//current user ko lo chin yin
+    if(!user){
+      return res.status(404).json({message:"User not found"});
+    }
+    return res.status(200).json(user);
+    
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+export { signUp, login, logout,getUser ,getUserAll };
