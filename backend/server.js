@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
+import postRouter from "./routes/post.route.js";
 import { connectDB } from "./config/db.js";
-import bodyParser from "body-parser";
 import {v2 as cloudinary} from "cloudinary"
 import cookieParser from "cookie-parser";
 
@@ -19,10 +19,11 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json()); // JSON request body parsing
+app.use(express.urlencoded({ extended: true })); // form data parsing
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter)
+app.use("/api/post", postRouter)
 
 
 await connectDB()
