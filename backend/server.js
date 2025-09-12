@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
 import postRouter from "./routes/post.route.js";
+import notificationRouter from "./routes/notification.route.js";
 import { connectDB } from "./config/db.js";
 import {v2 as cloudinary} from "cloudinary"
 import cookieParser from "cookie-parser";
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true })); // form data parsing
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter)
 app.use("/api/post", postRouter)
+app.use("/api/notification", notificationRouter)
 
 
 await connectDB()
